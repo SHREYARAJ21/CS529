@@ -495,18 +495,7 @@ function clicked(d) {
             .enter().append('circle')
             .attr('class', 'source')
             .attr('fill', function (d, i) {
-                let {genderMale, genderFemale} = d;
-                if (genderMale === 0)
-                    return 'red';
-                else if (genderFemale === 0)
-                    return '#1E90FF';
-                else if (genderMale === 0 && genderFemale === 0)
-                    return 'black';
-                else {
-                    let limit = genderFemale * 100/ (genderFemale + genderMale);
-                    gradient(gradient_g, limit, i);
-                    return 'url(#gradient'+i+')';
-                }
+      
             })
             .attr('stroke', 'darkred')
             .on('click', function (d) {
