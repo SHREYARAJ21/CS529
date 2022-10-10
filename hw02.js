@@ -164,13 +164,7 @@ function populateGrid(data, all=true) {
                 '3': 0,
                 'Unknown': 0
             },
-            'Unknown': {
-                'total': 0,
-                '1': 0,
-                '2': 0,
-                '3': 0,
-                'Unknown': 0
-            },
+            
         };
         data.map(function (d) {
             let {gender, ageGroup} = d;
@@ -178,16 +172,6 @@ function populateGrid(data, all=true) {
             counts[gender][ageGroup] += 1;
         });
 
-        $('#female-child').text(counts['F']['1']);
-        $('#female-teen').text(counts['F']['2']);
-        $('#female-adult').text(counts['F']['3']);
-
-        $('#male-child').text(counts['M']['1']);
-        $('#male-teen').text(counts['M']['2']);
-        $('#male-adult').text(counts['M']['3']);
-
-        $('#female-total').text(counts['F']['total']);
-        $('#male-total').text(counts['M']['total']);
 
         if (all === false){
             classVal = 'grid-items';
@@ -226,14 +210,7 @@ function populateGrid(data, all=true) {
 
                 let {gender, ageGroup} = obj;
                 let scheme = d3.schemeGreys[9];
-                if (gender === 'M')
-                    scheme = d3.schemeBlues[7];
-                else if (gender === 'F')
-                    scheme = d3.schemeRdPu[8];
-                else
-                    scheme = d3.schemeGreys[9];
-                let circlecolor = getColor(scheme);
-
+                
                 if (ageGroup === '3')
                     return circlecolor(20);
                 else if (ageGroup === '2')
@@ -266,13 +243,6 @@ function populateGrid(data, all=true) {
                 html += '<span class=\"subtext\">Date: ';
                 html += obj['date'];
                 html += "</span><br/>";
-                html += '<span class=\"subtext\">Gender: ';
-                html += obj['gender'];
-                html += "</span><br/>";
-                html += '<span class=\"subtext\">Location: ';
-                html += obj['city'] + ', ' + obj['state'];
-                html += "</span>";
-                html += "</div>";
 
                 $("#gridtip-container").html(html);
                 $("#gridtip-container").show();
@@ -665,12 +635,4 @@ function reset() {
 
 }
 
-function bubbleClicked(d, stateName) {
-    d3.event.stopPropagation();
-    let { id:city } = d;
-    let state_details = stateCountsData[stateName];
-    d3.select('span.location-text').text(city + ', ' + state_details.code);
 
-    let cityVictims = cityVictimsData[stateName][city]['victims'];
-    populateGrid(cityVictims, false);
-}
