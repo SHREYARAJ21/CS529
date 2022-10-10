@@ -115,8 +115,6 @@ function ready(data, stateCounts, cityCounts, cityVictims) {
             $(this).attr("fill-opacity", "0.8");
             $("#tooltip-container").show();
 
-            // var coordinates = d3.mouse(this);
-
             var map_width = $('.us-state-g')[0].getBoundingClientRect().width;
 
             if (d3.event.layerX < map_width / 2) {
@@ -174,7 +172,6 @@ function populateGrid(data, all=true) {
                 'Unknown': 0
             },
         };
-        // console.log(data);
         data.map(function (d) {
             let {gender, ageGroup} = d;
             counts[gender]['total'] += 1;
@@ -528,13 +525,6 @@ function clicked(d) {
                 html += "</span>";
                 html += "</div>";
                 html += '<div>';
-                html += '<span class=\"subtext\">Deaths(Female): ';
-                html += d['genderFemale'];
-                html += "</span><br/>";
-                html += '<span class=\"subtext\">Deaths(Male): ';
-                html += d['genderMale'];
-                html += "</span><br/>";
-                html += "</div>";
 
                 $("#tooltip-container").html(html);
                 $("#tooltip-container").show();
@@ -672,46 +662,7 @@ function reset() {
     d3.selectAll('span.location-text')
         .text('USA');
 
-    $('#female-child').text(77);
-    $('#female-teen').text(69);
-    $('#female-adult').text(1676);
-
-    $('#male-child').text(155);
-    $('#male-teen').text(503);
-    $('#male-adult').text(9310);
-
-    $('#female-total').text(1850);
-    $('#male-total').text(10153);
-
-    svg.selectAll('g.bubble')
-        .selectAll('circle')
-        .transition()
-        .delay(function(d, i) {
-            return i/2;
-        })
-        .attr('r', 0)
-        .remove();
-
-    svg.selectAll('g.links')
-        .selectAll('line')
-        .remove();
-
-    svg.selectAll('g.nodes')
-        .selectAll('circle')
-        .transition()
-        .delay(function(d, i) {
-            return i/2;
-        })
-        .attr('r', 0)
-        .remove();
-
-    svg.selectAll('g.bubble')
-        .transition()
-        .delay(function(d, i) {
-            return i/2;
-        })
-        .remove();
-
+   
     g.transition()
         .delay(100)
         .duration(750)
