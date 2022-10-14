@@ -1,7 +1,7 @@
 'use strict'
-import * as THREE from '/three.module.js'
-import {scene} from '/scene.js'
-import { animate } from '/scene.js';
+import * as THREE from './three.module.js'
+import {scene} from './scene.js'
+import { animate } from './scene.js';
 
 const data = [];
 let points;
